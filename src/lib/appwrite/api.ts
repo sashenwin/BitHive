@@ -50,7 +50,7 @@ export async function saveUserToDB(user: {
       appwriteConfig.userCollectionId,
       ID.unique(),
       user
-    );
+    )
 
     return newUser;
   } catch (error) {
