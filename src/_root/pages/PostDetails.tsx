@@ -3,7 +3,7 @@ import PostStats from "@/components/shared/PostStats";
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetPostById } from "@/lib/react-query/queriesAndMutations";
-import { formatDateString } from "@/lib/utils";
+import { formatDateString, multiFormatDateString } from "@/lib/utils";
 import { Link, useParams } from "react-router-dom";
 
 const PostDetails = () => {
@@ -39,11 +39,11 @@ const PostDetails = () => {
                   <p className="base-medium lg:body-bold text-light-1">
                     {post?.creator.name}
                   </p>
-                  <div className="felx-center gap-2 text-light-3">
-                    <p className="subtle-semibold lg:small-regular">
-                      {formatDateString(post?.$createdAt)}
+                  <div className="flex-center gap-2 text-light-3">
+                    <p className="subtle-semibold lg:small-regular ">
+                      {multiFormatDateString(post?.$createdAt)}
                     </p>
-                    -
+                    •
                     <p className="subtle-semibold lg:small-regular">
                       {post?.location}
                     </p>
@@ -83,8 +83,10 @@ const PostDetails = () => {
 
             <hr className="border w-full border-dark-4/80" />
 
-            <div className="flex flex-col flex-1 w-full small-medium 
-            lg:base-regular">
+            <div
+              className="flex flex-col flex-1 w-full small-medium 
+            lg:base-regular"
+            >
               <p>{post?.caption}</p>
               <ul className="flex gap-1 mt-2">
                 {post?.tags.map((tag: string, index: string) => (
@@ -98,11 +100,9 @@ const PostDetails = () => {
               </ul>
             </div>
 
-              <div className="w-full">
-                <PostStats post={post || {}} userId={user.id} />
-
-                </div>
-
+            <div className="w-full">
+              <PostStats post={post || {}} userId={user.id} />
+            </div>
           </div>
         </div>
       )}
